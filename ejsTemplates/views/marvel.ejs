@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Marvel</title>
 </head>
 <body>
-    <h1>Youe random number is: <%= num  %></h1>
-    <% if(num%2 == 0){ %> 
-        <h2>It's a even number!!</h2>
-    <% } else{ %> 
-        <h2>It's a odd number</h2>
-        <% }  %> 
+    <h1>My Favourite Heros:</h1>
+    <ul>
+        <% for(let hero of heros){ %> 
+            <li><%= hero %> </li>
+        <% } %>
+    </ul>
+     
 </body>
 </html>

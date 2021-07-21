@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const redditData = require("./data.json");
+
+app.use(express.static(path.join(__dirname,'/public')));
 
 
 app.set('view engine', 'ejs');
@@ -10,6 +13,11 @@ app.get('/', (req,res) => {
     res.render('home.ejs');
 });
 
+app.get('/marvel',(req,res) => {
+    const heros = ['Thor', 'Spiderman', 'Ironman', 'Deadpool', 'CaptiainAmerica'];
+    res.render('marvel',{heros});
+}); 
+
 app.get('/random',(req,res) => {
     const num = Math.floor((Math.random() * 10)) + 1;
     res.render('random',{num});
@@ -17,7 +25,12 @@ app.get('/random',(req,res) => {
 
 app.get('/r/:subreddit',(req,res) => {
     const {subreddit} = req.params;
-    res.render('subreddit', {subreddit});
+    const data = redditData[subreddit];
+    if(data){
+        res.render('subreddit', {...data});
+    } 
+    res.render('notfound',{subreddit});
+    
 }); 
 
 app.listen(3000, () => {
